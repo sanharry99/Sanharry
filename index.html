@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to bottom, #0a0a0a 0%, #343a40 100%);
+            color: #f8f9fa;
+            font-family: 'Nunito Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 90%;
+            text-align: center;
+            padding: 40px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeInSlideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-title {
+            color: #6610f2; /* Vibrant purple */
+            font-size: 3.5em;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            color: #00bcd4; /* Cyan accent */
+            font-size: 1.5em;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .topic-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .topic-button {
+            background-color: #28a745; /* Success green */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-decoration: none;
+        }
+
+        .topic-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .topic-button.multiverse {
+            background-color: #007bff; /* Primary blue */
+        }
+
+        .topic-button.multiverse:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">Explore the Cosmos</h1>
+        <p class="subtitle">Embark on a journey through fascinating space concepts.</p>
+        <div class="topic-buttons">
+            <a href="#similarity" class="topic-button">Concept of Similarity</a>
+            <a href="#multiverse" class="topic-button multiverse">Base of the Multiverse</a>
+        </div>
+    </div>
+
+    <div id="blog-content" style="display: none; align-items: center; flex-direction: column; width: 90%; max-width: 800px; margin-top: 40px;">
+        </div>
+
+    <script>
+        const topicButtons = document.querySelectorAll('.topic-button');
+        const blogContentDiv = document.getElementById('blog-content');
+        const containerDiv = document.querySelector('.container');
+
+        topicButtons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                containerDiv.style.display = 'none';
+                loadContent(targetId);
+            });
+        });
+
+        function loadContent(topic) {
+            blogContentDiv.innerHTML = ''; // Clear previous content
+            let title = '';
+            let contentHTML = '';
+
+            if (topic === 'similarity') {
+                title = 'Concept of Similarity';
+                contentHTML = `
+                    <h2 style="color: #6610f2; font-size: 2.5em; margin-bottom: 20px;">${title}</h2>
+                    <p style="color: #f8f9fa; line-height: 1.8; text-align: left;">
+                        The Concept of Similarity: Unveiling Patterns Across Cosmic Scales... (content will be added here later)
+                    </p>
+                    <button onclick="goBack()" style="margin-top: 30px; padding: 10px 20px; border: none; border-radius: 5px; background-color: #6c757d; color: white; cursor: pointer; transition: background-color 0.3s ease;">Back</button>
+                `;
+            } else if (topic === 'multiverse') {
+                title = 'Base of the Multiverse';
+                contentHTML = `
+                    <h2 style="color: #007bff; font-size: 2.5em; margin-bottom: 20px;">${title}</h2>
+                    <p style="color: #f8f9fa; line-height: 1.8; text-align: left;">
+                        Exploring the Base of the Multiverse... (content will be added here later)
+                    </p>
+                    <button onclick="goBack()" style="margin-top: 30px; padding: 10px 20px; border: none; border-radius: 5px; background-color: #6c757d; color: white; cursor: pointer; transition: background-color 0.3s ease;">Back</button>
+                `;
+            }
+
+            blogContentDiv.innerHTML = contentHTML;
+            blogContentDiv.style.display = 'flex';
+        }
+
+        function goBack() {
+            blogContentDiv.style.display = 'none';
+            containerDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
